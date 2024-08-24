@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <title>Flaming Developer</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            font-family: "Oswald", sans-serif;
+            background-image: url(bg3.png);
+            color: #fff;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+        h2{
+            font-size: 2.8em;
+        }
+        h1{
+            font-size: 3em;
+            font-family: "Bungee Tint", sans-serif;
+        }
+
+        p{
+            font-size: 2em;
+        }
+        button {
+            display: flex;
+            width: 190px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #da0101;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        button a{
+            text-align: center;
+            text-decoration: none;
+            color: #ddd;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 1.4em;
+        }
+
+        button:hover {
+            background-color: #b20202;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: linear-gradient(90deg, #000, #111, #000);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            cursor: pointer;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #e60000;
+            transform: scale(1.1);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        #home {
+            background: url('your-image.jpg') no-repeat center center/cover;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-behavior: smooth;
+        }
+
+        #about {
+            scroll-behavior: smooth;
+            background-image: url(bg3.png);
+            border-top: 2px solid #444;
+            border-bottom: 2px solid #444;
+        }
+
+        #games {
+            background-image: url(bg3.png);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+        }
+
+        /* Social Media Links */
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #e60000;
+            transform: scale(1.1);
+        }
+
+        /* Games Section */
+        .games-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .game-card {
+            width: 250px;
+            height: 150px;
+            background-color: #222;
+            border: 9px solid #444;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: #e60000;
+        }
+        .game-card1 {
+            width: 250px;
+            height: 150px;
+            background-color: #222;
+            border: 9px solid #444;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .game-card1 img{
+            height: 150px;
+            width: 250px;
+        }
+        
+
+        .game-card1:hover {
+            transform: translateY(-10px);
+            border-color: #e60000;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            background-color: #111;
+            text-align: center;
+            font-size: 14px;
+            border-top: 2px solid #444;
+        }
+        @media screen and (max-width: 600px) {
+            h1{
+                font-size: 2em;
+            }
+            header{
+                flex-direction: column;
+            }
+            .nav-bar{
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <nav class="nav-bar">
+            <a href="#home">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#games">Games</a>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h1>Welcome to My Personal Webpage</h1>
+        <p class="p1">Your one-stop destination to learn about my journey in coding and game development.</p>
+        <button><a href="#about">LEARN MORE</a></button>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a dedicated student passionate about coding and programming. With a strong background in game development using Unity, I have created several games and have a growing portfolio of websites. My journey in tech is fueled by creativity and a love for solving complex problems.</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/flamingreaper001/" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
+            <a href="https://www.youtube.com/@FlamingReaper001" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="Youtube"></a>
+            <a href="https://in.pinterest.com/advaysonkar2009/" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/pinterest.png" alt="Pinterest"></a>
+        </div>
+    </section>
+
+    <section id="games">
+        <h2>My Games</h2>
+        <div class="games-container">
+            <div class="game-card1"><a href="https://ghostshost.itch.io/roll-infinite-demo" target="_blank"><img src="3GGmok.png" alt="roll infinite, picture"></a></div>
+            <div class="game-card">Game 2</div>
+            <div class="game-card">Game 3</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Flaming Reaper. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
