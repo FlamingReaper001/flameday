@@ -1,300 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="A website about game development, coding and animation">
-    <meta name="keywords" content="game development, coding, Unity, programming, flaming developer, flaming reaper, animation, flaming ">
-    <meta name="author" content="Flaming Reaper"
-    <meta name="p:domain_verify" content="299bdcb21fab89bff18f960826ed8d93"/>
-    <meta charset="UTF-8">
-    <meta name="google-site-verification" content="VlOHjD3b3JB3w8RnHZ8Two5uiJtZUIRgbKHqgMidOjc" />
-    <meta name="google-site-verification" content="koug_MOMECQU1Lax71uatTRVXEkL8sPBGrtcHPNSok4" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link rel="icon" href="faviconn.png" type="image/x-icon">
-    <title>Flaming Developer</title>
-    <style>
-        /* Base Styles */
-        body {
-            margin: 0;
-            font-family: "Oswald", sans-serif;
-            background-image: url(bg3.png);
-            color: #fff;
-            line-height: 1.6;
-            scroll-behavior: smooth; /* Enable smooth scrolling */
-        }
-        html{
-            scroll-behavior: smooth;
-        }
-        h2{
-            font-size: 2.8em;
-        }
-        h1{
-            font-size: 3em;
-            font-family: "Bungee Tint", sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flaming Developer</title>
+  <meta name="description" content="A website about game development, coding and animation" />
+  <meta name="keywords" content="game development, coding, Unity, programming, flaming developer, flaming reaper, animation, flaming" />
+  <meta name="author" content="Flaming Reaper" />
+  <meta name="p:domain_verify" content="299bdcb21fab89bff18f960826ed8d93" />
+  <meta name="google-site-verification" content="VlOHjD3b3JB3w8RnHZ8Two5uiJtZUIRgbKHqgMidOjc" />
+  <meta name="google-site-verification" content="koug_MOMECQU1Lax71uatTRVXEkL8sPBGrtcHPNSok4" />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="faviconn.png" type="image/x-icon" />
 
-        p{
-            font-size: 2em;
-        }
-        button {
-            display: flex;
-            width: 190px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #da0101;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            display: block;
-            margin: 0 auto;
-        }
-        button a{
-            text-align: center;
-            text-decoration: none;
-            color: #ddd;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-size: 1.4em;
-        }
+  <style>
+    :root{
+      --bg:#05060a;          /* deep dark */
+      --panel:#0b0f18;       /* card bg */
+      --muted:#b7c0cf;       /* muted text */
+      --primary:#e11d48;     /* flaming red */
+      --accent:#22d3ee;      /* neon cyan */
+      --ring:0 0 0 1px rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:#fff; background:radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.08), transparent 60%),
+      radial-gradient(800px 400px at 0% 100%, rgba(225,29,72,.07), transparent 60%), var(--bg);
+      font-family: "Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.55;
+    }
+    /* Starfield backdrop */
+    .starfield{position:fixed; inset:0; pointer-events:none; opacity:.55; z-index:-1}
 
-        button:hover {
-            background-color: #b20202;
-        }
+    /* Header */
+    header{position:sticky; top:0; z-index:50}
+    .navwrap{backdrop-filter: blur(8px); background:linear-gradient(90deg, rgba(0,0,0,.85), rgba(10,14,22,.85)); border-bottom:1px solid rgba(255,255,255,.06)}
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    .bar{height:64px; display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff}
+    .logo{width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg, var(--primary), var(--accent)); box-shadow:0 0 28px rgba(225,29,72,.35)}
+    .brand span{font-family:"Bungee Tint", system-ui; letter-spacing:.5px; font-size:1.25rem}
+    nav a{color:#eaeef7; text-decoration:none; margin-left:24px; font-size:.98rem; position:relative}
+    nav a:after{content:""; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--accent)); transition:width .25s ease}
+    nav a:hover:after{width:100%}
+    .burger{display:none; background:transparent; border:0; color:#fff}
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: linear-gradient(90deg, #000, #111, #000);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    /* Sections */
+    section{padding:96px 0}
+    .center{text-align:center}
+    .kicker{letter-spacing:.2em; text-transform:uppercase; color:var(--muted); font-size:.8rem}
+    h1,h2{margin:0 0 12px 0}
+    h1{font-family:"Bungee Tint",sans-serif; font-size:clamp(2rem, 4.5vw, 3.5rem); line-height:1.1}
+    h2{font-size:clamp(1.6rem, 3vw, 2.2rem)}
+    p.lead{max-width:680px; margin:10px auto 0; color:#d8deea}
 
-        .logo {
-            width: 65px;
-            height: 65px;
-            cursor: pointer;
-        }
+    /* Hero */
+    #home{position:relative; min-height:78vh; display:grid; place-items:center}
+    .hero{
+      display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:center
+    }
+    .cta{display:flex; gap:12px; margin-top:22px}
+    .btn{padding:12px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06); color:#fff; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease, background .2s ease}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 0 0 2px rgba(34,211,238,.25), 0 10px 30px rgba(34,211,238,.18)}
+    .btn.primary{background:linear-gradient(90deg, var(--primary), var(--accent)); color:#020617; font-weight:700}
 
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 18px;
-            transition: color 0.3s, transform 0.3s;
-        }
+    .heroCard{position:relative; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.06); padding:16px; border-radius:18px; box-shadow:var(--ring)}
+    .heroImg{width:100%; aspect-ratio:16/10; border-radius:14px; object-fit:cover}
+    .pillrow{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px}
+    .pill{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:10px; text-align:center; font-size:.9rem; color:#cfd6e6}
 
-        nav a:hover {
-            color: #e60000;
-            transform: scale(1.1);
-        }
+    /* Stats */
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px}
+    .stat{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); padding:14px; border-radius:14px; text-align:center}
+    .stat b{font-size:1.4rem}
 
-        /* Section Styling */
-        section {
-            padding: 100px 20px;
-            text-align: center;
-            min-height: 100vh;
-        }
+    /* Videos */
+    .videogrid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+    .videoCard{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:12px}
+    .videoCard iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:12px}
 
-        #home {
-            background: url('your-image.jpg') no-repeat center center/cover;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            scroll-behavior: smooth;
-        }
+    /* Skills */
+    .chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
+    .chip{padding:10px 12px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1)}
 
-        #about {
-            scroll-behavior: smooth;
-            background-image: url(bg3.png);
-            border-top: 2px solid #444;
-            border-bottom: 2px solid #444;
-        }
-        #videos{
-            border-top: 2px solid #444;
-            scroll-behavior: smooth;
-            background-image: url(bg3.png);
-        }
+    /* Games */
+    .grid{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px}
+    .card{position:relative; overflow:hidden; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:16px; transition: transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform: translateY(-6px)}
+    .thumb{width:100%; height:170px; object-fit:cover; display:block}
+    .card .body{padding:12px}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); font-size:.8rem; color:#cfd6e6}
 
-        #games {
-            background-image: url(bg3.png);
-            scroll-behavior: smooth;
-        }
+    /* About */
+    .about{display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start}
+    .panel{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:18px}
 
-        h1, h2 {
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
+    /* Contact */
+    .socials{display:flex; gap:14px; justify-content:center; margin-top:16px}
+    .ico{width:46px; height:46px; display:grid; place-items:center; border-radius:12px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); transition:transform .2s ease, background .2s ease}
+    .ico:hover{transform:translateY(-2px); background:rgba(34,211,238,.15)}
 
-        p {
-            max-width: 600px;
-            margin: 0 auto 40px;
-            font-size: 18px;
-        }
+    /* Reveal animation */
+    .reveal{opacity:0; transform: translateY(16px) scale(.98); transition: opacity .7s ease, transform .7s ease}
+    .show{opacity:1; transform: translateY(0) scale(1)}
 
-        /* Social Media Links */
-        .social-icons {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .videogrid{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      nav{display:none}
+      .burger{display:block}
+    }
+    @media (max-width: 620px){
+      .grid{grid-template-columns:1fr}
+    }
 
-        .social-icons a {
-            display: inline-block;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s, color 0.3s;
-        }
-
-        .social-icons a:hover {
-            background-color: #e60000;
-            transform: scale(1.1);
-        }
-
-        /* Games Section */
-        .games-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .game-card {
-            width: 250px;
-            height: 150px;
-            background-color: #222;
-            border: 9px solid #444;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: #fff;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            border-color: #e60000;
-        }
-        .game-card1 {
-            width: 250px;
-            height: 150px;
-            background-color: #222;
-            border: 9px solid #444;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: #fff;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .game-card1 img{
-            height: 150px;
-            width: 250px;
-        }
-        
-
-        .game-card1:hover {
-            transform: translateY(-10px);
-            border-color: #e60000;
-        }
-        .video-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        /* Footer */
-        footer {
-            padding: 20px;
-            background-color: #111;
-            text-align: center;
-            font-size: 14px;
-            border-top: 2px solid #444;
-        }
-        @media screen and (max-width: 600px) {
-            h1{
-                font-size: 2em;
-            }
-            header{
-                flex-direction: column;
-                padding: 15px;
-            }
-            .nav-bar{
-                flex-direction: column;
-            }
-        }
-
-    </style>
+    footer{border-top:1px solid rgba(255,255,255,.08); padding:20px 0; color:#9aa3b2}
+    .sub{font-size:.9rem}
+  </style>
 </head>
 <body>
+  <!-- star backdrop -->
+  <canvas id="stars" class="starfield"></canvas>
 
-    <header>
-        <img src="logo.png" alt="Logo" class="logo">
-        <nav class="nav-bar">
-            <a href="#home">Home</a>
-            <a href="#videos">Videos</a>
-            <a href="#about">About Me</a>
-            <a href="#games">Games</a>
+  <!-- Header -->
+  <header>
+    <div class="navwrap">
+      <div class="container bar">
+        <a href="#home" class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <span>Flaming Developer</span>
+        </a>
+        <nav aria-label="Primary">
+          <a href="#home">Home</a>
+          <a href="#videos">Videos</a>
+          <a href="#skills">Skills</a>
+          <a href="#games">Games</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
         </nav>
-    </header>
-
-    <section id="home">
-        <h1>Welcome to My Personal Webpage</h1>
-        <p class="p1">Your one-stop destination to learn about my journey in coding and game development.</p>
-        <button><a href="#about">LEARN MORE</a></button>
-    </section>
-    
-    <section id="videos">
-        <h2>My Videos</h2>
-        <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/qthgU_46VF4?si=N0qwalpKicknPF5-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <button id="burger" class="burger" aria-label="Open menu">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div id="mobileMenu" class="container" style="display:none; padding: 0 0 14px 0;">
+        <div style="display:flex; flex-wrap:wrap; gap:12px">
+          <a href="#home" class="btn">Home</a>
+          <a href="#videos" class="btn">Videos</a>
+          <a href="#skills" class="btn">Skills</a>
+          <a href="#games" class="btn">Games</a>
+          <a href="#about" class="btn">About</a>
+          <a href="#contact" class="btn">Contact</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I am a dedicated student passionate about coding and programming. With a strong background in game development using Unity, I have created several games and have a growing portfolio of websites. My journey in tech is fueled by creativity and a love for solving complex problems.</p>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/flamingreaper001/" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
-            <a href="https://www.youtube.com/@FlamingReaper001" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="Youtube"></a>
-            <a href="https://in.pinterest.com/advaysonkar2009/" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/pinterest.png" alt="Pinterest"></a>
-            <a href="https://x.com/FlamingReaper01" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/x.png" alt="X"></a>
-            <a href="https://discord.com/channels/1233430978178060409/1233430978178060411" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/discord.png" alt="Discord"></a>
+  <!-- Hero -->
+  <section id="home">
+    <div class="container hero">
+      <div class="reveal">
+        <div class="kicker">Student • Game Dev • Web</div>
+        <h1>Building Games & Web Experiences</h1>
+        <p class="lead">Welcome to my space. I share Unity builds, coding experiments, and videos documenting the journey. Grab a controller—or a keyboard—and dive in.</p>
+        <div class="cta">
+          <a href="#games" class="btn primary">Explore Games</a>
+          <a href="#about" class="btn">About Me</a>
         </div>
-    </section>
-
-    <section id="games">
-        <h2>My Games</h2>
-        <div class="games-container">
-            <div class="game-card1"><a href="https://ghostshost.itch.io/roll-infinite-demo" target="_blank"><img src="3GGmok.png" alt="roll infinite, picture"></a></div>
-            <div class="game-card">Game 2</div>
-            <div class="game-card">Game 3</div>
+        <div class="stats">
+          <div class="stat"><div>Projects</div><b id="statProjects">0</b></div>
+          <div class="stat"><div>Years Learning</div><b id="statYears">2</b></div>
+          <div class="stat"><div>Videos</div><b id="statVideos">1</b></div>
         </div>
-    </section>
+      </div>
+      <div class="reveal">
+        <div class="heroCard tilt">
+          <img class="heroImg" src="your-image.jpg" alt="Work setup / project preview" />
+          <div class="pillrow">
+            <div class="pill">Unity • C#</div>
+            <div class="pill">HTML • JS</div>
+            <div class="pill">UI / Motion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2024 Flaming Reaper. All Rights Reserved.</p>
-    </footer>
+  <!-- Videos -->
+  <section id="videos">
+    <div class="container center">
+      <div class="reveal">
+        <div class="kicker">Videos</div>
+        <h2>Latest Uploads</h2>
+        <p class="lead">Devlogs, breakdowns, and gameplay snippets. More coming soon.</p>
+      </div>
+      <div class="videogrid">
+        <div class="videoCard reveal tilt">
+          <iframe src="https://www.youtube.com/embed/qthgU_46VF4" title="YouTube video"></iframe>
+          <div class="sub" style="margin-top:8px">Roll Infinite — Early look</div>
+        </div>
+        <div class="videoCard reveal tilt">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video"></iframe>
+          <div class="sub" style="margin-top:8px">Portfolio walkthrough</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container center">
+      <div class="reveal">
+        <div class="kicker">Stack</div>
+        <h2>Skills & Tools</h2>
+        <p class="lead">Stuff I use and enjoy iterating on. Always shipping, always learning.</p>
+      </div>
+      <div class="chips reveal">
+        <span class="chip">Unity</span>
+        <span class="chip">C#</span>
+        <span class="chip">URP</span>
+        <span class="chip">Physics</span>
+        <span class="chip">HTML</span>
+        <span class="chip">CSS</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">Tailwind (sometimes)</span>
+        <span class="chip">GitHub Pages</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section id="games">
+    <div class="container center">
+      <div class="reveal">
+        <div class="kicker">Projects</div>
+        <h2>Games</h2>
+        <p class="lead">Playable prototypes and releases. Tap a card to open.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal tilt">
+          <a href="https://ghostshost.itch.io/roll-infinite-demo" target="_blank" rel="noopener">
+            <img class="thumb" src="3GGmok.png" alt="Roll Infinite cover" />
+            <div class="body">
+              <div class="sub"><strong>Roll Infinite</strong> — Unity • Prototype</div>
+              <span class="badge">3D</span>
+            </div>
+          </a>
+        </article>
+        <article class="card reveal tilt">
+          <a href="#" aria-disabled="true" onclick="event.preventDefault()">
+            <img class="thumb" src="https://images.unsplash.com/photo-1546443046-ed1ce6ffd1b7?q=80&w=1200&auto=format&fit=crop" alt="Retro FPS" />
+            <div class="body">
+              <div class="sub"><strong>Retro FPS</strong> — WebGL • JS</div>
+              <span class="badge">2D</span>
+            </div>
+          </a>
+        </article>
+        <article class="card reveal tilt">
+          <a href="#" aria-disabled="true" onclick="event.preventDefault()">
+            <img class="thumb" src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?q=80&w=1200&auto=format&fit=crop" alt="Neon Platformer" />
+            <div class="body">
+              <div class="sub"><strong>Neon Platformer</strong> — Unity • WIP</div>
+              <span class="badge">2.5D</span>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="reveal center">
+        <div class="kicker">About</div>
+        <h2>Who am I?</h2>
+        <p class="lead">I'm a student who loves gaming and builds games in Unity. I also design and code websites. This site is my playground and portfolio.</p>
+      </div>
+      <div class="about">
+        <div class="panel reveal">
+          <h3 style="margin-top:0">Highlights</h3>
+          <ul>
+            <li>Unity — C#, wheel colliders, physics tuning</li>
+            <li>Web — HTML, CSS, JS with a focus on performance</li>
+            <li>Design — UI/UX, motion, accessibility</li>
+          </ul>
+        </div>
+        <div class="panel reveal">
+          <h3 style="margin-top:0">What I'm doing now</h3>
+          <p>Iterating on an open‑world racing prototype, polishing controls, and adding juice. Also making portfolio improvements and recording devlogs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container center">
+      <div class="reveal">
+        <div class="kicker">Links</div>
+        <h2>Let's Connect</h2>
+        <p class="lead">DMs welcome. I'm most active on Instagram and YouTube.</p>
+      </div>
+      <div class="socials">
+        <a class="ico" href="https://www.instagram.com/flamingreaper001/" target="_blank" aria-label="Instagram">
+          <img src="https://img.icons8.com/ios-filled/26/ffffff/instagram-new.png" alt="Instagram" />
+        </a>
+        <a class="ico" href="https://www.youtube.com/@FlamingReaper001" target="_blank" aria-label="YouTube">
+          <img src="https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png" alt="YouTube" />
+        </a>
+        <a class="ico" href="https://in.pinterest.com/advaysonkar2009/" target="_blank" aria-label="Pinterest">
+          <img src="https://img.icons8.com/ios-filled/26/ffffff/pinterest.png" alt="Pinterest" />
+        </a>
+        <a class="ico" href="https://x.com/FlamingReaper01" target="_blank" aria-label="X">
+          <img src="https://img.icons8.com/ios-filled/26/ffffff/x.png" alt="X" />
+        </a>
+        <a class="ico" href="https://discord.com/channels/1233430978178060409/1233430978178060411" target="_blank" aria-label="Discord">
+          <img src="https://img.icons8.com/ios-filled/26/ffffff/discord.png" alt="Discord" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container center">
+      <p class="sub">© <span id="year"></span> Flaming Reaper. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Mobile Menu =====
+    const burger = document.getElementById('burger');
+    const mobile = document.getElementById('mobileMenu');
+    burger?.addEventListener('click', ()=>{
+      mobile.style.display = mobile.style.display === 'none' || mobile.style.display === '' ? 'block' : 'none';
+    });
+
+    // ===== Counters =====
+    const animateNumber = (el, to, dur=1000)=>{
+      const start = performance.now();
+      const from = Number(el.textContent)||0;
+      const step = (now)=>{
+        const p = Math.min(1,(now-start)/dur);
+        el.textContent = Math.floor(from + (to-from)*p);
+        if(p<1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    window.addEventListener('load', ()=>{
+      animateNumber(document.getElementById('statProjects'), document.querySelectorAll('#games .card').length);
+      const years = 2 + Math.floor((Date.now() - new Date('2023-01-01'))/(365*24*3600*1000));
+      animateNumber(document.getElementById('statYears'), years);
+      animateNumber(document.getElementById('statVideos'), document.querySelectorAll('#videos iframe').length);
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    // ===== Reveal on Scroll =====
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, {threshold: 0.12});
+    revealEls.forEach(el=> io.observe(el));
+
+    // ===== Tilt effect =====
+    document.querySelectorAll('.tilt').forEach(card=>{
+      card.addEventListener('mousemove', (e)=>{
+        const r = card.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width/2)) / r.width;
+        const dy = (e.clientY - (r.top + r.height/2)) / r.height;
+        card.style.transform = `perspective(900px) rotateX(${-dy*6}deg) rotateY(${dx*8}deg)`;
+      });
+      card.addEventListener('mouseleave', ()=>{
+        card.style.transform = 'perspective(900px) rotateX(0) rotateY(0)';
+      });
+    });
+
+    // ===== Low-cost starfield =====
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let W,H,scale=window.devicePixelRatio||1, stars=[];
+    const init=()=>{
+      W = canvas.width = innerWidth*scale; H = canvas.height = innerHeight*scale;
+      stars = Array.from({length: 150}, ()=>({x:Math.random()*W, y:Math.random()*H, z: Math.random()*0.6+0.4, s: Math.random()*1.5+.3}));
+    }
+    const draw=()=>{
+      ctx.clearRect(0,0,W,H);
+      for(const st of stars){
+        ctx.fillStyle = `rgba(255,255,255,${0.6*st.z})`;
+        ctx.fillRect(st.x, st.y, st.s, st.s);
+        st.y += 0.06*st.z; if(st.y>H) st.y=-2;
+      }
+      requestAnimationFrame(draw);
+    }
+    init(); draw(); addEventListener('resize', init);
+  </script>
 </body>
 </html>
