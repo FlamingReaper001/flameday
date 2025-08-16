@@ -46,6 +46,30 @@
     nav a:hover:after{width:100%}
     .burger{display:none; background:transparent; border:0; color:#fff}
 
+    /* Logo styling */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+
     /* Sections */
     section{padding:96px 0}
     .center{text-align:center}
@@ -129,9 +153,9 @@
   <!-- Header -->
   <header>
     <div class="navwrap">
-      <div class="container bar">
+      <div class="logo-container">
         <a href="#home" class="brand">
-          <div class="logo" aria-hidden="true"></div>
+          <img src="logo.png" alt="Logo" class="logo">
           <span>Flaming Developer</span>
         </a>
         <nav aria-label="Primary">
@@ -399,3 +423,4 @@
   </script>
 </body>
 </html>
+
