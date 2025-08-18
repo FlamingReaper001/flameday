@@ -340,6 +340,10 @@
   </footer>
 
   <script>
+    // Button click sound
+    document.querySelectorAll('a, .btn').forEach(el=>{
+      el.addEventListener('click', ()=>document.getElementById("clickSound").play());
+      });
     // ===== Mobile Menu =====
     const burger = document.getElementById('burger');
     const mobile = document.getElementById('mobileMenu');
@@ -407,6 +411,7 @@
   </script>
 </body>
 </html>
+
 
 
 
