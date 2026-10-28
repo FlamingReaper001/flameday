@@ -151,7 +151,49 @@
     /* Reveal animation */
     .reveal{opacity:0; transform: translateY(16px) scale(.98); transition: opacity .7s ease, transform .7s ease}
     .show{opacity:1; transform: translateY(0) scale(1)}
-
+     
+        /* Comics */
+    .comicShelf{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 340px)); gap:18px; justify-content:center; margin-top:28px}
+    .comicCard .thumb{height:340px; object-fit:contain; background:radial-gradient(400px 180px at 50% 0%, rgba(225,29,72,.28), transparent 60%), #0b0f18; padding:10px}
+    .comicCard .body{text-align:center}
+    .comicActions{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:12px}
+    .comicActions .btn{font:inherit; cursor:pointer}
+    .comicCover.isMissing{opacity:.35}
+    body.readerOpen{overflow:hidden}
+    .reader{position:fixed; inset:0; z-index:80; display:flex; flex-direction:column; background:rgba(5,6,10,.97); color:#fff}
+    .reader[hidden]{display:none !important}
+    .readerBar,.readerNav{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; flex-wrap:wrap}
+    .readerBar{border-bottom:1px solid rgba(255,255,255,.08)}
+    .readerTitleWrap{min-width:0}
+    #readerTitle{display:block}
+    .readerTools{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    .rbtn{font:inherit; cursor:pointer; color:#fff; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06)}
+    .rbtn:disabled{opacity:.4; cursor:default}
+    .rbtn.isOn,.rbtnClose{background:linear-gradient(90deg, var(--primary), var(--accent)); color:#020617; font-weight:700}
+    .readerStage{flex:1; min-height:0; overflow:auto; display:grid; place-items:center; padding:16px}
+    .reader.isWebtoon .readerStage{display:block}
+    .readerDots{display:flex; flex-wrap:wrap; gap:2px; justify-content:center; padding:0 12px 4px}
+    .dot{width:28px; height:28px; border:0; padding:0; background:transparent; cursor:pointer; position:relative}
+    .dot:before{content:""; position:absolute; left:8px; top:8px; width:12px; height:12px; border-radius:99px; background:rgba(255,255,255,.28)}
+    .dot.isOn:before{background:var(--accent)}
+    .spread{display:flex; align-items:stretch; justify-content:center; max-width:100%; filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+    .spread.fromRight{animation:sheetR .28s ease}
+    .spread.fromLeft{animation:sheetL .28s ease}
+    @keyframes sheetR{from{opacity:.35; transform:translateX(16px)} to{opacity:1; transform:none}}
+    @keyframes sheetL{from{opacity:.35; transform:translateX(-16px)} to{opacity:1; transform:none}}
+    .sheet{margin:0; background:#f6f1e7; display:grid; place-items:center; position:relative; max-width:min(46vw, 520px)}
+    .spread.single .sheet{max-width:min(92vw, 560px)}
+    .spread:not(.single) .sheet + .sheet{box-shadow:inset 14px 0 18px rgba(0,0,0,.14)}
+    .sheet img{max-height:72vh; max-width:100%; height:auto; display:block; user-select:none; -webkit-user-drag:none}
+    .sheet img.isMissing,.webPage img.isMissing{opacity:0; min-height:40vh}
+    .pageMiss{margin:0; padding:16px; text-align:center; color:#292524}
+    .webtoon{width:min(680px, 100%); margin:0 auto; padding-bottom:12px}
+    .webPage{position:relative; background:#0e1118; scroll-margin-top:8px}
+    .webPage img{width:100%; height:auto; display:block; user-select:none; -webkit-user-drag:none}
+    .webPage .pageMiss{color:#d8deea}
+    @media (prefers-reduced-motion: reduce){
+      .spread.fromRight,.spread.fromLeft{animation:none}
+    }
     /* Responsive */
     @media (max-width: 980px){
       .hero{grid-template-columns:1fr}
@@ -191,6 +233,7 @@
           <a href="#videos">Videos</a>
           <a href="#skills">Skills</a>
           <a href="#games">Games</a>
+          <a href="#comics">Comics</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -204,6 +247,7 @@
           <a href="#videos" class="btn">Videos</a>
           <a href="#skills" class="btn">Skills</a>
           <a href="#games" class="btn">Games</a>
+          <a href="#comics" class="btn">Comics</a>
           <a href="#about" class="btn">About</a>
           <a href="#contact" class="btn">Contact</a>
         </div>
@@ -324,6 +368,50 @@
       </div>
     </div>
   </section>
+  
+    <!-- Comics -->
+  <section id="comics">
+    <div class="container center">
+      <div class="reveal">
+        <div class="kicker">Stories</div>
+        <h2>Comics</h2>
+        <p class="lead">Flip page by page like a book, or scroll straight down like a webtoon.</p>
+      </div>
+      <div class="comicShelf">
+        <article class="card reveal tilt comicCard" data-title="Demo Comic" data-folder="Demo comic" data-pages="17">
+          <img class="thumb comicCover" alt="Demo Comic cover" />
+          <div class="body">
+            <div class="sub"><strong>Demo Comic</strong> — Original story</div>
+            <span class="badge">17 pages</span>
+            <div class="comicActions">
+              <button type="button" class="btn primary" data-mode="book">Read as Book</button>
+              <button type="button" class="btn" data-mode="webtoon">Read as Webtoon</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div id="reader" class="reader" hidden role="dialog" aria-modal="true" aria-labelledby="readerTitle">
+    <div class="readerBar">
+      <div class="readerTitleWrap">
+        <strong id="readerTitle">Comic</strong>
+        <span id="readerHud" class="sub"></span>
+      </div>
+      <div class="readerTools">
+        <button type="button" id="modeBook" class="rbtn">Book</button>
+        <button type="button" id="modeWebtoon" class="rbtn">Webtoon</button>
+        <button type="button" id="readerClose" class="rbtn rbtnClose">Close</button>
+      </div>
+    </div>
+    <div id="readerStage" class="readerStage"></div>
+    <div id="readerDots" class="readerDots"></div>
+    <div class="readerNav">
+      <button type="button" id="pagePrev" class="rbtn">Prev</button>
+      <button type="button" id="pageNext" class="rbtn">Next</button>
+    </div>
+  </div>
 
   <!-- About -->
   <section id="about">
@@ -385,10 +473,12 @@
   </footer>
 
   <script>
-    // Button click sound
-    document.querySelectorAll('a, .btn').forEach(el=>{
-      el.addEventListener('click', ()=>document.getElementById("clickSound").play());
+        document.querySelectorAll('a, .btn').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        const snd = document.getElementById("clickSound");
+        if (snd) snd.play();
       });
+    });
     // ===== Mobile Menu =====
     const burger = document.getElementById('burger');
     const mobile = document.getElementById('mobileMenu');
@@ -453,10 +543,231 @@
       requestAnimationFrame(draw);
     }
     init(); draw(); addEventListener('resize', init);
+        // ===== Comics =====
+    (function(){
+      const EXTS = ["png","jpg","jpeg","webp",""];
+      const reader = document.getElementById("reader");
+      const stage = document.getElementById("readerStage");
+      if(!reader || !stage) return;
+
+      let title = "", folder = "", total = 1, page = 1, mode = "book", dir = 1;
+      let webObserver = null, touchX = null, lockHud = false, wasMobile = window.innerWidth < 860;
+
+      function fileUrl(folderName, n, ext){
+        const file = ext ? (n + "." + ext) : String(n);
+        return encodeURI(folderName + "/" + file);
+      }
+      function setComicImage(img, folderName, comicTitle, n, sheet){
+        let i = 0;
+        img.alt = comicTitle + " page " + n;
+        img.draggable = false;
+        img.decoding = "async";
+        img.onerror = function(){
+          i += 1;
+          if(i < EXTS.length) img.src = fileUrl(folderName, n, EXTS[i]);
+          else {
+            img.onerror = null;
+            img.classList.add("isMissing");
+            if(sheet && !sheet.querySelector(".pageMiss")){
+              const msg = document.createElement("p");
+              msg.className = "pageMiss";
+              msg.textContent = "Missing page " + n + ". Add " + folderName + "/" + n + ".png next to your HTML file.";
+              sheet.appendChild(msg);
+            }
+          }
+        };
+        img.src = fileUrl(folderName, n, EXTS[0]);
+      }
+      function mobileBook(){ return window.innerWidth < 860; }
+      function pagesToShow(){
+        if(mobileBook() || page === 1) return [page];
+        const left = page % 2 === 0 ? page : page - 1;
+        const list = [left];
+        if(left + 1 <= total) list.push(left + 1);
+        return list;
+      }
+      function atEnd(){
+        if(mode === "webtoon") return page >= total;
+        return pagesToShow()[pagesToShow().length - 1] >= total;
+      }
+      function drawDots(){
+        const wrap = document.getElementById("readerDots");
+        if(wrap.childElementCount !== total){
+          wrap.replaceChildren();
+          for(let n = 1; n <= total; n++){
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "dot";
+            b.dataset.page = String(n);
+            b.setAttribute("aria-label", "Page " + n);
+            b.addEventListener("click", function(){ jumpTo(n); });
+            wrap.appendChild(b);
+          }
+        }
+        const active = mode === "book" ? pagesToShow() : [page];
+        wrap.querySelectorAll(".dot").forEach(function(b){
+          b.classList.toggle("isOn", active.indexOf(Number(b.dataset.page)) !== -1);
+        });
+      }
+      function updateHud(){
+        document.getElementById("readerTitle").textContent = title;
+        const shown = mode === "book" ? pagesToShow() : [page];
+        document.getElementById("readerHud").textContent = shown.length > 1
+          ? ("Pages " + shown[0] + "–" + shown[shown.length - 1] + " of " + total)
+          : ("Page " + shown[0] + " of " + total);
+        document.getElementById("modeBook").classList.toggle("isOn", mode === "book");
+        document.getElementById("modeWebtoon").classList.toggle("isOn", mode === "webtoon");
+        document.getElementById("pagePrev").disabled = page <= 1;
+        document.getElementById("pageNext").disabled = atEnd();
+        drawDots();
+      }
+      function renderBook(){
+        const nums = pagesToShow();
+        const spread = document.createElement("div");
+        spread.className = "spread" + (nums.length === 1 ? " single" : "") + (dir < 0 ? " fromLeft" : " fromRight");
+        nums.forEach(function(n){
+          const sheet = document.createElement("figure");
+          sheet.className = "sheet";
+          const img = document.createElement("img");
+          setComicImage(img, folder, title, n, sheet);
+          sheet.appendChild(img);
+          spread.appendChild(sheet);
+        });
+        stage.replaceChildren(spread);
+      }
+      function renderWebtoon(){
+        const wrap = document.createElement("div");
+        wrap.className = "webtoon";
+        for(let n = 1; n <= total; n++){
+          const block = document.createElement("div");
+          block.className = "webPage";
+          block.dataset.page = String(n);
+          const img = document.createElement("img");
+          img.loading = n < 3 ? "eager" : "lazy";
+          setComicImage(img, folder, title, n, block);
+          block.appendChild(img);
+          wrap.appendChild(block);
+        }
+        stage.replaceChildren(wrap);
+        const target = wrap.querySelector('[data-page="' + page + '"]');
+        if(target && page > 1) target.scrollIntoView();
+        webObserver = new IntersectionObserver(function(entries){
+          if(lockHud) return;
+          entries.forEach(function(e){
+            if(!e.isIntersecting) return;
+            page = Number(e.target.dataset.page);
+            updateHud();
+          });
+        }, {root: stage, threshold: 0.55});
+        wrap.querySelectorAll(".webPage").forEach(function(el){ webObserver.observe(el); });
+      }
+      function render(){
+        if(webObserver){ webObserver.disconnect(); webObserver = null; }
+        reader.classList.toggle("isWebtoon", mode === "webtoon");
+        if(mode === "webtoon") renderWebtoon();
+        else renderBook();
+        updateHud();
+      }
+      function jumpTo(n){
+        dir = n >= page ? 1 : -1;
+        page = Math.min(total, Math.max(1, n));
+        if(mode === "book" && !mobileBook() && page > 1 && page % 2 === 1) page -= 1;
+        if(mode === "webtoon"){
+          lockHud = true;
+          const el = stage.querySelector('[data-page="' + n + '"]');
+          if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+          updateHud();
+          setTimeout(function(){ lockHud = false; }, 450);
+        } else render();
+      }
+      function openReader(card, nextMode){
+        title = card.dataset.title || "Comic";
+        folder = card.dataset.folder || "";
+        total = Math.max(1, Number(card.dataset.pages) || 1);
+        page = 1;
+        mode = nextMode === "webtoon" ? "webtoon" : "book";
+        dir = 1;
+        reader.hidden = false;
+        document.body.classList.add("readerOpen");
+        render();
+        document.getElementById("readerClose").focus();
+      }
+      function closeReader(){
+        reader.hidden = true;
+        document.body.classList.remove("readerOpen");
+        stage.replaceChildren();
+        if(webObserver){ webObserver.disconnect(); webObserver = null; }
+      }
+      function next(){
+        if(atEnd()) return;
+        dir = 1;
+        if(mode === "webtoon"){ jumpTo(page + 1); return; }
+        page = (mobileBook() || page !== 1) ? (mobileBook() ? page + 1 : page + 2) : 2;
+        if(mobileBook()) page = Math.min(total, page);
+        render();
+      }
+      function prev(){
+        if(page <= 1) return;
+        dir = -1;
+        if(mode === "webtoon"){ jumpTo(page - 1); return; }
+        page = mobileBook() ? page - 1 : (page <= 2 ? 1 : page - 2);
+        render();
+      }
+
+      document.getElementById("readerClose").addEventListener("click", closeReader);
+      document.getElementById("modeBook").addEventListener("click", function(){
+        mode = "book"; dir = 1;
+        if(!mobileBook() && page > 1 && page % 2 === 1) page -= 1;
+        render();
+      });
+      document.getElementById("modeWebtoon").addEventListener("click", function(){ mode = "webtoon"; render(); });
+      document.getElementById("pagePrev").addEventListener("click", prev);
+      document.getElementById("pageNext").addEventListener("click", next);
+
+      stage.addEventListener("click", function(e){
+        if(mode !== "book") return;
+        const rect = stage.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        if(x < rect.width * 0.28) prev();
+        else if(x > rect.width * 0.72) next();
+      });
+      stage.addEventListener("touchstart", function(e){ touchX = e.changedTouches[0].clientX; }, {passive:true});
+      stage.addEventListener("touchend", function(e){
+        if(touchX == null || mode !== "book") return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if(dx > 50) prev();
+        else if(dx < -50) next();
+      }, {passive:true});
+      document.addEventListener("keydown", function(e){
+        if(reader.hidden) return;
+        if(e.key === "Escape") closeReader();
+        if(e.key === "ArrowRight"){ e.preventDefault(); next(); }
+        if(e.key === "ArrowLeft"){ e.preventDefault(); prev(); }
+      });
+      window.addEventListener("resize", function(){
+        const now = mobileBook();
+        if(!reader.hidden && mode === "book" && now !== wasMobile) render();
+        wasMobile = now;
+      });
+
+      document.querySelectorAll(".comicCard").forEach(function(card){
+        const cover = card.querySelector(".comicCover");
+        if(cover) setComicImage(cover, card.dataset.folder || "", card.dataset.title || "Comic", 1, null);
+        card.querySelectorAll("[data-mode]").forEach(function(btn){
+          btn.addEventListener("click", function(){ openReader(card, btn.dataset.mode); });
+        });
+      });
+      document.querySelectorAll("#mobileMenu a").forEach(function(a){
+        a.addEventListener("click", function(){
+          const mobile = document.getElementById("mobileMenu");
+          if(mobile) mobile.style.display = "none";
+        });
+      });
+    })();
   </script>
 </body>
 </html>
-
 
 
 
